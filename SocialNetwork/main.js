@@ -31,7 +31,7 @@ function createSignInPage() {
     let outerDiv = createElement('div', ['flex', 'flex-row', 'justify-center', 'items-center', 'gap-4'], { name: 'SignInPage', id: 'SignInPage' });
 
     // Create the form element with its classes
-    let form = createElement('form', ['bg-white', 'shadow-md', 'rounded', 'px-8', 'pt-6', 'pb-8', 'mb-4']);
+    let form = createElement('form', ['bg-white', 'shadow-md', 'rounded', 'px-8', 'pt-6', 'pb-8', 'mb-6','mt-6']);
 
     // Create Username input field and label
     let usernameLabel = createElement('label', ['block', 'text-gray-700', 'text-sm', 'font-bold', 'mb-2'], { id: 'usernameLabel' }, 'Username');
@@ -83,19 +83,21 @@ function createSignInPage() {
     return outerDiv;
 }
 
-// Function to display the sign-in page
+
 function displaySignIn(show) {
-        if (show) {
-            const signInPage = createSignInPage();
-            document.body.appendChild(signInPage);
-        } else {
-            // Remove login form if already displayed
-            const signInPage = document.getElementById('SignInPage');
-            if (signInPage) {
-                signInPage.remove();
-            }
+    if (show) {
+        const signInPage = createSignInPage();
+        
+        document.body.appendChild(signInPage);
+    } else {
+        // Remove login form if already displayed
+        const signInPage = document.getElementById('SignInPage');
+        if (signInPage) {
+            signInPage.remove();
         }
+        
     }
+}
 
 // Function to display or remove the sign-in page based on type (true for sign-up, false for remove)
 function displaySignUp(type) {
@@ -105,89 +107,125 @@ function displaySignUp(type) {
             signInPage.remove();
         }
     } else {
-        let signUpForm = createSignUpForm(); //creates the form object
+        createSignUpForm(); //creates the form object
        
-        document.body.appendChild(signUpForm);
+        //document.body.appendChild(signUpForm);
     }
 }
 
 // Function to create the signup form dynamically
 function createSignUpForm() {
-// Create the outer div with class and id attributes
-    let outerDiv = createElement('div', ['flex', 'flex-row', 'justify-center', 'items-center', 'gap-4'], { name: 'SignUpPage', id: 'SignUpPage' });
-    // Create the form element
-    const form = createElement('form',['bg-white', 'shadow-md', 'rounded', 'px-8', 'pt-6', 'pb-8', 'mb-4'], { id: 'SignUpPage' });
-
-    // Create the first name input section
-    const firstNameDiv = createElement('div', ['flex', 'flex-wrap', '-mx-3', 'mb-6']);
-    firstNameDiv.innerHTML = `
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                First Name
-            </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane">
-            <p class="text-red-500 text-xs italic">Please fill out this field.</p>
-        </div>
-    `;
-    form.appendChild(firstNameDiv);
-
-    // Create the last name input section
-    const lastNameDiv = createElement('div', ['w-full', 'md:w-1/2', 'px-3']);
-    lastNameDiv.innerHTML = `
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-            Last Name
-        </label>
-        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe">
-    `;
-    form.appendChild(lastNameDiv);
-
-    // Create the password input section
-    const passwordDiv = createElement('div', ['flex', 'flex-wrap', '-mx-3', 'mb-6']);
-    passwordDiv.innerHTML = `
-        <div class="w-full px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                Password
-            </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************">
-            <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
-        </div>
-    `;
-    form.appendChild(passwordDiv);
-
-    // Create the address section
-    const addressDiv = createElement('div', ['flex', 'flex-wrap', '-mx-3', 'mb-6']);
-    addressDiv.innerHTML = `
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
-                City
-            </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Albuquerque">
-        </div>
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                State
-            </label>
-            <div class="relative">
-                <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                    <option>New Mexico</option>
-                    <option>Missouri</option>
-                    <option>Texas</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+    const htmlContent = `  <div class="flex flex-row justify-center items-center gap-4 mt-4" >
+    <form class="w-full max-w-lg p-7 bg-white shadow-md" name="SignUpPage" id="SignUpPage">
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    First Name
+                </label>
+                <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-first-name" type="text" placeholder="Jane">
+            </div>
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                    Last Name
+                </label>
+                <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-last-name" type="text" placeholder="Doe">
+            </div>
+            <div class="w-full px-3 mb-6">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-id">
+                    ID
+                </label>
+                <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-id" type="text" placeholder="ID">
+            </div>
+            <div class="w-full px-3 mb-6">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    Password
+                </label>
+                <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-password" type="password" placeholder="******************">
+            </div>
+            <div class="w-full px-3 mb-6">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-birthdate">
+                    Birthday
+                </label>
+                <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-4 px-6 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-birthdate" type="date">
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                    State
+                </label>
+                <div class="relative">
+                    <select
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="grid-state">
+                        <option>Israel</option>
+                        <option>USA</option>
+                        <option>UK</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                    </div>
                 </div>
             </div>
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                    City
+                </label>
+                <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-city" type="text" placeholder="Karmiel">
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-work">
+                    Work
+                </label>
+                <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-work" type="text" placeholder="Rafael">
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-gender">
+                    Gender
+                </label>
+                <div class="relative">
+                    <select
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="grid-gender">
+                        <option>Female</option>
+                        <option>Male</option>
+                        <option>Other</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full flex items-center justify-between mt-4 px-3">
+                <button 
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    onClick=RegisterUser()
+                    type="button">
+                    Register
+                    
+                </button>
+            </div>
         </div>
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-                Zip
-            </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="90210">
-        </div>
-    `;
-    form.appendChild(addressDiv);
-    outerDiv.appendChild(form)
-   return outerDiv;
+    </form>
+</div>
+`
+document.body.innerHTML = htmlContent;
 }
 
 // Function to register a new user
@@ -215,7 +253,7 @@ function SignInUser() {
     if ((password == "123456") && (username == "test")) { 
             showMessage('Login successful!', 'Success');
             displaySignIn(false)
-            let loginDom = document.getElementById("")
+            toggleMenu(true); // Show the menu when sign-in page is displayed
             initializeGraph()
     }
     else{
@@ -239,8 +277,7 @@ function openGraph() {
     if (!container) {
         container = document.createElement('div');
         container.id = 'network-graph';
-        container.className = 'w-full h-screen max-w-4xl p-4 bg-white shadow-lg rounded-lg mx-auto my-auto';
-        document.body.className = 'bg-gray-100 flex items-center justify-center ';
+        container.className = 'w-screen h-96 p-8 rounded-lg shadow-lg flex items-center justify-center';
         document.body.appendChild(container);
     }
 
@@ -257,6 +294,7 @@ function openGraph() {
         { from: 1, to: 2 },
         { from: 1, to: 3 },
         { from: 2, to: 4 },
+        { from: 4, to: 3 },
         { from: 2, to: 5 }
     ]);
 
@@ -265,10 +303,10 @@ function openGraph() {
     const options = {
         nodes: {
             shape: 'dot',
-            size: 16,
+            size: 32,
             font: {
                 size: 32,
-                color: '#23574f'
+                color: '#ffffff'
             },
             borderWidth: 2
         },
@@ -293,3 +331,112 @@ function initializeGraph() {
         console.log("reached here - didnt open graph")
     });
 }
+
+// Function to toggle the menu
+function toggleMenu(show) {
+    if (show) {
+        let header = document.getElementById('header')
+        const menu = createMenu();
+        header.appendChild(menu);
+    } else {
+        // Remove the menu if already displayed
+        const menu = document.getElementById('menu');
+        if (menu) {
+            menu.remove();
+        }
+    }
+}
+
+function createMenu() {
+    const menu = document.createElement('div');
+    menu.id = 'menu';
+    menu.className = 'flex flex-row items-center pb-8 pr-8 pl-8 rounded-lg place-content-center';
+
+    // Menu items
+    const menuItems = [
+        { text: 'Home', href: '#', id: "HomeButton" },
+        { text: 'About', href: '#', id: "AboutButton" },
+        { text: 'Profile', href: '#', id: "ProfileButton" },
+        { text: 'Contact', href: '#', id: "ContactButton" }
+    ];
+
+    // Add menu items to the menu div
+    menuItems.forEach(item => {
+        const link = document.createElement('a');
+        link.href = item.href;
+        link.className = "menu-item bg-gray-200 p-2 rounded-lg shadow-lg mr-3 ml-3 bg-white text-slate-700 hover:ease-in text-blue-500 hover:ease-in duration-400";
+        link.id = item.id;
+        link.textContent = item.text;
+        
+        // Assign click event handlers
+        if (link.id === "ProfileButton") {
+            link.onclick = profileClicked;
+        }
+        
+        menu.appendChild(link);
+    });
+
+    return menu;
+}
+
+function profileClicked(event) {
+    event.preventDefault(); // Prevent default link behavior
+    
+    // Remove all child nodes from body except those with specific IDs
+    const body = document.body;
+    const menuItems = Array.from(body.childNodes); // Convert to array for forEach usage
+    
+    menuItems.forEach(item => {
+        if (item.id === "header") {
+            return; // Skip the node with id "header"
+        } else {
+            item.remove(); // Remove other nodes from body
+        }
+    });
+    
+    // Create and append new profile data
+    const div = document.createElement('div');
+    div.classList.add('personal-data');
+    div.innerHTML = `
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Age:</strong> 30</p>
+        <p><strong>City:</strong> New York</p>
+        <p><strong>Occupation:</strong> Developer</p>
+    `;
+    
+    body.appendChild(div); // Append new data to body
+}
+
+// Function to add a new connection
+function addConnection() {
+    const connectionInput = document.getElementById('newConnection');
+    const connectionList = document.getElementById('connectionList');
+
+    if (connectionInput.value.trim() !== '') {
+        const li = document.createElement('li');
+        li.textContent = connectionInput.value.trim();
+        connectionList.appendChild(li);
+        connectionInput.value = ''; // Clear the input field
+    }
+}
+
+// Function to remove a connection
+function removeConnection() {
+    const connectionInput = document.getElementById('newConnection');
+    const connectionList = document.getElementById('connectionList');
+    const connections = connectionList.getElementsByTagName('li');
+    
+    for (let i = 0; i < connections.length; i++) {
+        if (connections[i].textContent.trim() === connectionInput.value.trim()) {
+            connectionList.removeChild(connections[i]);
+            connectionInput.value = ''; // Clear the input field
+            break;
+        }
+    }
+}
+
+
+
+
+
+

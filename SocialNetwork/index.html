@@ -8,13 +8,31 @@
     <title>Social Network</title>
     <link rel="stylesheet" href="style.css" />
     <script src="main.js"></script>
+    <style>
+        .bg-hero-pattern {
+            background-image: url('https://img.freepik.com/free-vector/network-mesh-wire-digital-technology-background_1017-27428.jpg?t=st=1720372348~exp=1720375948~hmac=42299192a3188f76d318140e5a6ef2921fa70072e83f143fb8cebb80db9360da&w=1060');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+        .text-stroke {
+        /* Text Color */
+        color: #4a90e2;
+        /* Stroke Color */
+        -webkit-text-stroke: 2px #1a5276; /* WebKit browsers */
+    }
+    </style>
 </head>
 
-<body class="h-screen bg-gradient-to-b from-gray-900 to-slate-800 flex flex-col text-white">
-    <header class="py-16">
-        <h1 class="text-4xl font-bold text-center mb-6">Social Network</h1>
-        <div class="flex flex-row justify-center items-center gap-4">
-    </header>
+<body class="bg-hero-pattern flex flex-col text-black">
+    <div id="header">
+        <header class="py-8">
+            <h1 class="text-5xl font-bold text-center text-stroke">Social Network</h1>
+            <hr class="border-t-2 border-gray-600 mb-8 mx-auto w-full max-w-3xl mt-4">
+        </header>
+        
+    </div>
 </body>
 
 </html>
