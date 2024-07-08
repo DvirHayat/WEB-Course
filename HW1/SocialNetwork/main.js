@@ -405,10 +405,39 @@ function profileClicked(event) {
     const div = document.createElement('div');
     div.classList.add('personal-data');
     div.innerHTML = `
-        <p><strong>Name:</strong> John Doe</p>
-        <p><strong>Age:</strong> 30</p>
-        <p><strong>City:</strong> New York</p>
-        <p><strong>Occupation:</strong> Developer</p>
+        <div class="bg-white text-gray-800 rounded-lg shadow-md p-6 w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-4">User Profile</h1>
+        <div class="mb-4">
+            <label class="block text-sm font-bold mb-2" for="fullName">Full Name</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="fullName" type="text" placeholder="Full Name">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-bold mb-2" for="userID">ID</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="userID" type="text" placeholder="ID">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-bold mb-2">Connections</label>
+            <ul id="connectionList" class="list-disc pl-5">
+                <!-- Connection list items will be added here -->
+            </ul>
+        </div>
+        <div class="mb-4">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="newConnection" type="text" placeholder="Add New Connection (Name, Type)">
+        </div>
+        <div class="flex space-x-2">
+            <button onclick="addConnection()"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Add Connection
+            </button>
+            <button onclick="removeConnection()"
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Remove Connection
+            </button>
+        </div>
+    </div>
     `;
     
     body.appendChild(div); // Append new data to body
