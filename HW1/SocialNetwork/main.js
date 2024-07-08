@@ -386,6 +386,34 @@ function createMenu() {
     return menu;
 }
 
+// Function to add a new connection
+function addConnection() {
+    const connectionInput = document.getElementById('newConnection');
+    const connectionList = document.getElementById('connectionList');
+
+    if (connectionInput.value.trim() !== '') {
+        const li = document.createElement('li');
+        li.textContent = connectionInput.value.trim();
+        connectionList.appendChild(li);
+        connectionInput.value = ''; // Clear the input field
+    }
+}
+
+// Function to remove a connection
+function removeConnection() {
+    const connectionInput = document.getElementById('newConnection');
+    const connectionList = document.getElementById('connectionList');
+    const connections = connectionList.getElementsByTagName('li');
+    
+    for (let i = 0; i < connections.length; i++) {
+        if (connections[i].textContent.trim() === connectionInput.value.trim()) {
+            connectionList.removeChild(connections[i]);
+            connectionInput.value = ''; // Clear the input field
+            break;
+        }
+    }
+}
+
 function profileClicked(event) {
     event.preventDefault(); // Prevent default link behavior
     
@@ -444,35 +472,6 @@ function profileClicked(event) {
     
     body.appendChild(div); // Append new data to body
 }
-
-// Function to add a new connection
-function addConnection() {
-    const connectionInput = document.getElementById('newConnection');
-    const connectionList = document.getElementById('connectionList');
-
-    if (connectionInput.value.trim() !== '') {
-        const li = document.createElement('li');
-        li.textContent = connectionInput.value.trim();
-        connectionList.appendChild(li);
-        connectionInput.value = ''; // Clear the input field
-    }
-}
-
-// Function to remove a connection
-function removeConnection() {
-    const connectionInput = document.getElementById('newConnection');
-    const connectionList = document.getElementById('connectionList');
-    const connections = connectionList.getElementsByTagName('li');
-    
-    for (let i = 0; i < connections.length; i++) {
-        if (connections[i].textContent.trim() === connectionInput.value.trim()) {
-            connectionList.removeChild(connections[i]);
-            connectionInput.value = ''; // Clear the input field
-            break;
-        }
-    }
-}
-
 
 
 
