@@ -403,7 +403,7 @@ function profileClicked(event) {
     
     // Create and append new profile data
     const div = document.createElement('div');
-    div.classList.add('personal-data');
+    div.classList.add('personal-data flex flex-row justify-center items-center gap-4 mt-4');
     div.innerHTML = `
         <div class="bg-white text-gray-800 rounded-lg shadow-md p-6 w-full max-w-md">
         <h1 class="text-2xl font-bold mb-4">User Profile</h1>
