@@ -414,14 +414,10 @@ function profileClicked(event) {
         <div class="bg-white text-gray-800 rounded-lg shadow-md p-6 w-full max-w-md">
         <h1 class="text-2xl font-bold mb-4">User Profile</h1>
         <div class="mb-4">
-            <label class="block text-sm font-bold mb-2" for="fullName">Full Name</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                   id="fullName" type="text" placeholder="Full Name">
+            <label class="block text-sm font-bold mb-2" for="fullName">Full Name : John Doe </label>
         </div>
         <div class="mb-4">
-            <label class="block text-sm font-bold mb-2" for="userID">ID</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                   id="userID" type="text" placeholder="ID">
+            <label class="block text-sm font-bold mb-2" for="userID">ID : 123456789</label>
         </div>
         <div class="mb-4">
             <label class="block text-sm font-bold mb-2">Connections</label>
