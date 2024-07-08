@@ -277,17 +277,20 @@ function openGraph() {
     if (!container) {
         container = document.createElement('div');
         container.id = 'network-graph';
-        container.className = 'w-screen h-96 p-8 rounded-lg shadow-lg flex items-center justify-center';
+        container.className = 'w-screen h-96  bg-gray-500 bg-opacity-50 p-8 rounded-lg shadow-lg flex items-center justify-center';
         document.body.appendChild(container);
     }
 
     // Data for the network graph
     const nodes = new vis.DataSet([
-        { id: 1, label: 'Person 1' },
-        { id: 2, label: 'Person 2' },
-        { id: 3, label: 'Person 3' },
-        { id: 4, label: 'Person 4' },
-        { id: 5, label: 'Person 5' }
+        { id: 1, label: 'Yael' },
+        { id: 2, label: 'Shimon' },
+        { id: 3, label: 'Lital' },
+        { id: 4, label: 'Gershon' },
+        { id: 5, label: 'Ravit' },
+        { id: 6, label: 'Liora' },
+        { id: 7, label: 'Orly' },
+        { id: 8, label: 'Dor' },
     ]);
 
     const edges = new vis.DataSet([
@@ -295,7 +298,11 @@ function openGraph() {
         { from: 1, to: 3 },
         { from: 2, to: 4 },
         { from: 4, to: 3 },
-        { from: 2, to: 5 }
+        { from: 2, to: 5 },
+        { from: 6, to: 7 },
+        { from: 7, to: 8 },
+        { from: 8, to: 6 },
+
     ]);
 
     // Create a network
@@ -306,7 +313,7 @@ function openGraph() {
             size: 32,
             font: {
                 size: 32,
-                color: '#ffffff'
+                color:'#314155'
             },
             borderWidth: 2
         },
