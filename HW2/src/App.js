@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import Header from './components/header.jsx';
-import SignInPage from './components/SignIn.jsx';
-import GraphComponent from './components/GraphComponent.jsx';
+import SignInPage from './components/signInPage/SignIn.jsx';
+import GraphComponent from './components/homePage/GraphComponent.jsx';
+import Menu from './components/homePage/menu.jsx'; // Import the Menu component
+import './index.css';
+
 
 function App() {
   const [showGraph, setShowGraph] = useState(false);
@@ -11,12 +14,15 @@ function App() {
   };
 
   return (
-    <div className="bg-hero-pattern flex flex-col text-black min-h-screen">
+    <div className="bg-hero-pattern flex flex-col text-black ">
       <Header />
       {!showGraph ? (
         <SignInPage onSignInClick={handleSignInClick} />
       ) : (
-        <GraphComponent />
+        <>
+          <Menu show={true} />
+          <GraphComponent />
+        </>
       )}
     </div>
   );
