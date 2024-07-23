@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { DataSet, Network } from 'vis-network/standalone';
+import { getGraphOptions, getEdgeColor } from './Utilities';
+import FilterButtons from './FilterButtons';
+import Legend from './Legend';
 
 const GraphComponent = () => {
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState('all');
 
-    // Get all the users from the data set and store it locally.
   useEffect(() => {
     const userData = getUsers();
     setUsers(userData);
   }, []);
 
-    // Renders the graph using given users and filter.
   useEffect(() => {
     const renderGraph = (users, filter) => {
       const container = document.getElementById('network-graph');
       if (!container) return;
-        container.classList.add( 'border-2', 'border-black'); // Set the height and border size of the root element
-        const canvas = container.getElementsByTagName('canvas')[0];
-        if (canvas) {
-          canvas.height = '700px'; // Set the height of the canvas
-        }
-      
 
+      container.classList.add('border-2', 'border-black');
+      const canvas = container.getElementsByTagName('canvas')[0];
+      if (canvas) {
+        canvas.style.height = '300px';
+      }
 
-        // For development poprpuse.
       const me = {
         id_num: '000000000',
         firstName: 'Me',
@@ -34,7 +33,6 @@ const GraphComponent = () => {
         state: 'New York'
       };
 
-        // Filter the users by common category.
       const filteredUsers = users.filter(user => {
         switch (filter) {
           case 'all':
@@ -50,7 +48,6 @@ const GraphComponent = () => {
         }
       });
 
-        //For each filter user convert it to a node object.
       const nodes = new DataSet([
         ...filteredUsers.map(user => ({
           id: user.id_num,
@@ -73,26 +70,24 @@ const GraphComponent = () => {
         });
       });
 
-      const connectNodes = (ids, color) => {
+      const connectNodes = (ids, color, key) => {
         ids.forEach((id1, idx1) => {
           ids.slice(idx1 + 1).forEach(id2 => {
-            edges.add({ from: id1, to: id2, color: { color } });
+            edges.add({ from: id1, to: id2, color: { color, inherit: false, opacity: 1.0 } });
           });
         });
       };
 
       Object.keys(connectionMap).forEach(key => {
-        if (filter === 'all' || filter === key) {
-          Object.values(connectionMap[key]).forEach(ids => {
-            connectNodes(ids, getEdgeColor(key));
-          });
-        }
+        Object.values(connectionMap[key]).forEach(ids => {
+          connectNodes(ids, getEdgeColor(key), key);
+        });
       });
 
       ['workplace', 'hobby', 'state'].forEach(key => {
         if (connectionMap[key][me[key]]) {
           connectionMap[key][me[key]].forEach(id => {
-            edges.add({ from: me.id_num, to: id, color: { color: getEdgeColor(key) } });
+            edges.add({ from: me.id_num, to: id, color: { color: getEdgeColor(key), inherit: false, opacity: 1.0 } });
           });
         }
       });
@@ -104,51 +99,6 @@ const GraphComponent = () => {
 
     renderGraph(users, filter);
   }, [users, filter]);
-
-  const getGraphOptions = () => ({
-    nodes: {
-      shape: 'dot',
-      size: 32,
-      font: {
-        size: 32,
-        color: '#314155',
-      },
-      borderWidth: 2,
-    },
-    edges: {
-      width: 2,
-      color: {
-        color: '#848484',
-        highlight: '#848484',
-        hover: '#848484',
-        opacity: 1.0,
-      },
-      smooth: {
-        type: 'continuous',
-      },
-    },
-    physics: {
-      enabled: true,
-      solver: 'forceAtlas2Based',
-      forceAtlas2Based: {
-        gravitationalConstant: -50,
-        centralGravity: 0.01,
-        springLength: 200,
-        springConstant: 0.08,
-      },
-      maxVelocity: 50,
-      minVelocity: 0.1,
-    },
-  });
-
-  const getEdgeColor = conn => {
-    switch (conn) {
-      case 'workplace': return 'blue';
-      case 'hobby': return 'green';
-      case 'state': return 'purple';
-      default: return 'black';
-    }
-  };
 
   const getUsers = () => [
     {
@@ -363,18 +313,9 @@ const GraphComponent = () => {
 
   return (
     <div>
-      <div className="tabs flex justify-center space-x-4 my-4">
-        <button onClick={() => setFilter('all')} className="px-4 py-2 bg-black text-white rounded hover:bg-slate-950">All</button>
-        <button onClick={() => setFilter('hobby')} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">Hobby</button>
-        <button onClick={() => setFilter('workplace')} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Workplace</button>
-        <button onClick={() => setFilter('state')} className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-700">State</button>
-      </div>
-      <div id="network-graph" className="w-full h-600"></div>
-      <div className="legend mt-4 text-center">
-        <p><span className="text-blue-500">■</span> Workplace Connections</p>
-        <p><span className="text-green-500">■</span> Hobby Connections</p>
-        <p><span className="text-purple-500">■</span> State Connections</p>
-      </div>
+      <FilterButtons setFilter={setFilter} />
+      <div id="network-graph" className="w-full h-800 border-4 border-black"></div>
+      <Legend />
     </div>
   );
 };
