@@ -39,6 +39,7 @@ const GraphComponent = () => {
   useEffect(() => {
     const renderGraph = (users, filter) => {
       const container = document.getElementById('network-graph');
+      container.className =  
       console.log("container:")
       console.log(container)
 
