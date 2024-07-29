@@ -1,17 +1,11 @@
 import React from 'react';
 
 const Header = () => {
-  const headerStyle = {
-    textAlign: 'center',
-    marginTop: '1rem',
-    marginBottom: '0.5rem',
-  };
-
   return (
-    <div id="header" style={headerStyle}>
+    <div className="text-center mt-4 mb-2">
       <header>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>Social Network</h1>
-        <hr style={{ borderTop: '2px solid #4a5568', margin: '0.5rem auto', width: '100%', maxWidth: '768px' }} /> {}
+        <h1 className="text-stroke text-4xl font-bold mb-2">Social Network</h1>
+        <hr className="border-t-2 border-gray-700 mx-auto mt-2 mb-4 w-full max-w-2xl" />
       </header>
     </div>
   );

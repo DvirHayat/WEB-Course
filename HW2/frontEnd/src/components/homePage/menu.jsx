@@ -1,17 +1,8 @@
-
 import React, { useState } from 'react';
 import ProfilePage from './profilePage';
-import GraphComponent from './GraphComponent.jsx';
-
-
+import GraphComponent from './GraphComponent';
 
 const Home = () => {
-  const [showGraph, setShowGraph1] = useState(true);
-
-  const handleSignInClick1 = () => {
-    setShowGraph1(false);
-  };
-
   const [currentView, setCurrentView] = useState('home');
 
   const menuStyle = 'flex flex-row items-center pb-8 pr-8 pl-8 rounded-lg place-content-center';
@@ -24,20 +15,13 @@ const Home = () => {
     { text: 'Contact', view: 'contact' },
   ];
 
-
   const renderContent = () => {
     switch (currentView) {
       case 'profile':
-        {showGraph ? (
-          <GraphComponent onSignInClick1={handleSignInClick1} />
-        ) : (
-          <>
-            <GraphComponent show={false} />
-          </>
-        )}
         return <ProfilePage />;
+      case 'home':
       default:
-        return <div>Home Page Content</div>;
+        return <GraphComponent />;
     }
   };
 
