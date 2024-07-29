@@ -33,3 +33,4 @@ export const classifySpecificUser = (classifiedUsers, user) => {
 
     return { commonHobby, commonState, commonWorkplace };
   };
+

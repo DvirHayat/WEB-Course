@@ -15,48 +15,18 @@ const GraphComponent = () => {
     setUsers(userData);
   }, []);
 
-  // const GraphComponent = () => {
-  //   useEffect(() => {
-  //     const container = document.getElementById('network-graph');
-  //     if (!container) {
-  //       const newContainer = document.createElement('div');
-  //       newContainer.id = 'network-graph';
-  //       newContainer.className = 'w-screen h-96 bg-gray-500 bg-opacity-50 p-8 rounded-lg shadow-lg flex items-center justify-center';
-  //       newContainer.style.marginTop = '4px'; // Added inline style for top margin
-  //       document.body.appendChild(newContainer);
-  //       renderGraph(newContainer);
-  //     } else {
-  //       renderGraph(container);
-  //     }
-  //   }, []);
-
-
-
-
-
-
-
   useEffect(() => {
     const renderGraph = (users, filter) => {
-      const container = document.getElementById('network-graph');
-      container.className =  
+      let container = document.getElementById('network-graph');
       console.log("container:")
       console.log(container)
 
       if (!container) {
-        const newContainer = document.createElement('div');
-        newContainer.id = 'network-graph';
-        newContainer.className = 'w-screen h-screen bg-gray-500 bg-opacity-50 p-8 rounded-lg shadow-lg flex items-center justify-center';
-        newContainer.style.marginTop = '4px'; // Added inline style for top margin
-        document.body.appendChild(newContainer);
+        container = document.createElement('div');
+        container.id = 'network-graph';
+        document.body.appendChild(container);
         console.log("Not container")
       }
-
-      //container.classList.add('border-2', 'border-black');
-      // const canvas = container.getElementsByTagName('canvas')[0];
-      // if (canvas) {
-      //   canvas.style.height = '800px';
-      // }
 
       const me = getMe();
 
@@ -73,14 +43,13 @@ const GraphComponent = () => {
         });
       };
 
-      // Create nodes from the users.
       const createNodes = () => {
         return new DataSet([
           ...users.map(user => ({
             id: user.id_num,
             label: `${user.firstName} ${user.lastName}`
           })),
-          { id: me.id_num, label: 'Me', color: { background: 'red', border: 'black' }, size: 30 } // Add Me as node.
+          { id: me.id_num, label: 'Me', color: { background: 'red', border: 'black' }, size: 30 }
         ]);
       };
 
@@ -90,11 +59,9 @@ const GraphComponent = () => {
       const edges = new DataSet();
 
       if (filter === 'all') {
-        // Connect "Me" to all common attributes
         addEdgesToMe(commonHobby, getEdgeColor('hobby'));
         addEdgesToMe(commonState, getEdgeColor('state'));
         addEdgesToMe(commonWorkplace, getEdgeColor('workplace'));
-        
       } else {
         if (filter === 'hobby') {
           addEdgesToMe(commonHobby, getEdgeColor('hobby'));
@@ -116,7 +83,7 @@ const GraphComponent = () => {
   return (
     <div>
       <FilterButtons setFilter={setFilter} />
-      <div id="network-graph" className="w-full h-800 border-4 border-black"></div>
+      <div id="network-graph" className="w-4/5 h-[500px] border-4 border-black mx-auto my-auto flex justify-center items-center"></div>
       <Legend />
     </div>
   );
