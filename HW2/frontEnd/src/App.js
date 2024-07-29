@@ -3,8 +3,7 @@ import Header from './components/header.jsx';
 import SignInPage from './components/signInPage/SignIn.jsx';
 import GraphComponent from './components/homePage/GraphComponent.jsx';
 import Menu from './components/homePage/menu.jsx'; // Import the Menu component
-import './index.css';
-
+import './index.css'; // Ensure this is the correct path
 
 function App() {
   const [showGraph, setShowGraph] = useState(false);
@@ -14,7 +13,7 @@ function App() {
   };
 
   return (
-    <div className="bg-hero-pattern flex flex-col text-black ">
+    <div className="bg-hero-pattern flex flex-col text-black">
       <Header />
       {!showGraph ? (
         <SignInPage onSignInClick={handleSignInClick} />
