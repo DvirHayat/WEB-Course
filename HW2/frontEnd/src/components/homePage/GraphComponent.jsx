@@ -15,16 +15,47 @@ const GraphComponent = () => {
     setUsers(userData);
   }, []);
 
+  // const GraphComponent = () => {
+  //   useEffect(() => {
+  //     const container = document.getElementById('network-graph');
+  //     if (!container) {
+  //       const newContainer = document.createElement('div');
+  //       newContainer.id = 'network-graph';
+  //       newContainer.className = 'w-screen h-96 bg-gray-500 bg-opacity-50 p-8 rounded-lg shadow-lg flex items-center justify-center';
+  //       newContainer.style.marginTop = '4px'; // Added inline style for top margin
+  //       document.body.appendChild(newContainer);
+  //       renderGraph(newContainer);
+  //     } else {
+  //       renderGraph(container);
+  //     }
+  //   }, []);
+
+
+
+
+
+
+
   useEffect(() => {
     const renderGraph = (users, filter) => {
       const container = document.getElementById('network-graph');
-      if (!container) return;
+      console.log("container:")
+      console.log(container)
 
-      container.classList.add('border-2', 'border-black');
-      const canvas = container.getElementsByTagName('canvas')[0];
-      if (canvas) {
-        canvas.style.height = '800px';
+      if (!container) {
+        const newContainer = document.createElement('div');
+        newContainer.id = 'network-graph';
+        newContainer.className = 'w-screen h-screen bg-gray-500 bg-opacity-50 p-8 rounded-lg shadow-lg flex items-center justify-center';
+        newContainer.style.marginTop = '4px'; // Added inline style for top margin
+        document.body.appendChild(newContainer);
+        console.log("Not container")
       }
+
+      //container.classList.add('border-2', 'border-black');
+      // const canvas = container.getElementsByTagName('canvas')[0];
+      // if (canvas) {
+      //   canvas.style.height = '800px';
+      // }
 
       const me = getMe();
 
@@ -53,9 +84,6 @@ const GraphComponent = () => {
       };
 
       const { commonHobby, commonState, commonWorkplace } = classifySpecificUser(classifiedUsers, me);
-      console.log("Common hobby users:", commonHobby);
-      console.log("Common state users:", commonState);
-      console.log("Common workplace users:", commonWorkplace);
 
       const nodes = createNodes();
       const edges = new DataSet();
