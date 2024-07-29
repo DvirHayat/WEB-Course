@@ -15,6 +15,13 @@ const GraphComponent = () => {
     } else {
       renderGraph(container);
     }
+
+    return () => {
+      const containerToRemove = document.getElementById('network-graph');
+      if (containerToRemove) {
+        document.body.removeChild(containerToRemove);
+      }
+    };
   }, []);
 
   const renderGraph = (container) => {

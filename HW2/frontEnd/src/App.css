@@ -27,7 +27,10 @@
 .App-link {
   color: #61dafb;
 }
-
+.text-stroke {
+  color: #4a90e2;
+  -webkit-text-stroke: 2px #1a5276;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
