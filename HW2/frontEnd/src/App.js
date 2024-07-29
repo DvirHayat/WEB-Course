@@ -1,10 +1,11 @@
+// src/App.js
 import React, { useState } from 'react';
 import Header from './components/header.jsx';
 import SignInPage from './components/signInPage/SignIn.jsx';
 import GraphComponent from './components/homePage/GraphComponent.jsx';
 import Menu from './components/homePage/menu.jsx'; // Import the Menu component
+import DarkLight from './components/DarkLight.jsx'; // Import the DarkLight component
 import './index.css';
-
 
 function App() {
   const [showGraph, setShowGraph] = useState(false);
@@ -14,8 +15,11 @@ function App() {
   };
 
   return (
-    <div className="bg-hero-pattern flex flex-col text-black ">
+    <div className="bg-hero-pattern flex flex-col text-black dark:text-white bg-white dark:bg-gray-800">
       <Header />
+      <div className="flex justify-end p-4 bg-white dark:bg-gray-800" >
+        <DarkLight />
+      </div>
       {!showGraph ? (
         <SignInPage onSignInClick={handleSignInClick} />
       ) : (
